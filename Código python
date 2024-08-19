@@ -1,0 +1,37 @@
+import pyspark
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, year, lit, when
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+spark = SparkSession.builder.appName("AnaliseDadosReligiosos").getOrCreate()
+
+
+df = spark.read.csv("dados.csv", header=True, inferSchema=True)
+
+
+df = df.withColumn("idade", year(lit('2023')) - year(col("Data de Nascimento")))
+df = df.withColumn("faixa_etaria", when(col("idade") <= 30, "18-30")
+                                    .when((col("idade") > 30) & (col("idade") <= 45), "31-45")
+                                    # ... outras faixas etárias
+                                    .otherwise("46+"))
+
+
+df_grouped_idade = df.groupBy("faixa_etaria").count()
+
+
+pandas_df_idade = df_grouped_idade.toPandas()
+sns.barplot(x="faixa_etaria", y="count", data=pandas_df_idade)
+plt.title("Distribuição por Faixa Etária")
+plt.show()
+
+
+df_grouped_situacao = df.groupBy("Situação de Agente Pastoral").count()
+
+
+pandas_df_situacao = df_grouped_situacao.toPandas()
+plt.pie(pandas_df_situacao["count"], labels=pandas_df_situacao["Situação de Agente Pastoral"])
+plt.title("Situação dos Agentes Pastorais")
+plt.show()
