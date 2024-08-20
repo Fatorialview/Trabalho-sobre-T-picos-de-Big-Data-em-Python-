@@ -1,0 +1,74 @@
+import matplotlib.pyplot as plt
+
+
+#Situação de auxílio:
+labels = ['Outra assistência', 'Cadastrada', 'Trabalhando', 'Nenhuma', 'Saiu do programa']
+sizes = [86, 21, 14, 5, 1]
+
+plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90)
+
+plt.title("Situação de auxílio:")
+
+plt.show()
+
+
+# Situação do habiente em que moram:
+labels = ['Boa', 'Precária', 'Regular']
+sizes = [49, 34, 44]
+
+
+plt.pie(sizes, labels=labels, autopct='%1.1f%%', 
+startangle=90)
+
+
+plt.title("Situação do habiente em que moram:")
+
+plt.show()
+
+
+# Número de comodos em sua moradia:
+labels = ['4', '5', '3', '1', '2', '6', '7']
+counts = [57, 18, 16, 15, 13, 5, 3]
+
+
+plt.bar(labels, counts)
+plt.xlabel('Rótulos de Linha')
+plt.ylabel('Contagem de CPFs')
+plt.title('Número de comodos em sua moradia:')
+plt.show()
+
+
+#Número de pessoas que residem na mesma moradia: 
+labels = ['0', '2', '5', '3', '4', '1']
+counts = [26, 25, 22, 20, 18, 16]
+
+# Criar o gráfico de barras
+plt.bar(labels, counts)
+plt.xlabel('Rótulos de Linha')
+plt.ylabel('Contagem de CPFs')
+plt.title('Número de pessoas que residem na mesma moradia:')
+plt.show()
+
+
+labels = ['Não', 'Sim']
+counts = [70, 57]
+
+plt.pie(counts, labels=labels, autopct='%1.1f%%', startangle=90, colors=['#ff9999','#66b3ff'], explode=(0.1, 0))
+
+plt.title('Proporção de Pessoas que Recebem Auxílio')
+plt.show()
+
+
+
+#Situação religiosa dos entrevistados
+labels = ['Evangélica', 'Católico', 'Espírita', 'Sem religião', 'Budista']
+counts = [49, 39, 20, 18, 1]
+
+plt.bar(labels, counts)
+plt.xlabel('Religião')
+plt.ylabel('Número de Pessoas')
+plt.title('Situação religiosa dos entrevistados:')
+plt.xticks(rotation=45)  
+plt.show()
+
+
